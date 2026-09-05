@@ -1,0 +1,20 @@
+﻿{% extends "base.html" %}
+{% block content %}
+  <h1>کودک شما چند سالشه؟</h1>
+  <p>بازه‌ی سنی رو انتخاب کن تا اسباب‌بازی و کتاب مناسب رشدش رو ببینی.</p>
+  <div class="age-badges">
+    {% for age in age_groups %}
+      <a href="{% url 'toy_list_by_age' age.id %}">{{ age.title }}</a>
+    {% endfor %}
+  </div>
+
+  {% if latest_articles %}
+    <h2 style="margin-top:32px;">آخرین مطالب</h2>
+    {% for article in latest_articles %}
+      <div class="card">
+        <a href="{{ article.get_absolute_url }}"><strong>{{ article.title }}</strong></a>
+        <p>{{ article.summary }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

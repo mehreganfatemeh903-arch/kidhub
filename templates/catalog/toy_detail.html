@@ -1,0 +1,23 @@
+﻿{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    {% if toy.image %}<img src="{{ toy.image.url }}" style="max-width:100%;border-radius:8px;">{% endif %}
+    <h1>{{ toy.title }}</h1>
+    <p>{{ toy.short_description }}</p>
+
+    <h3>چرا برای رشد کودک مفیده؟</h3>
+    <p>{{ toy.why_it_helps }}</p>
+
+    <p><strong>مناسب برای:</strong>
+      {% for age in toy.age_groups.all %}{{ age.title }}{% if not forloop.last %}، {% endif %}{% endfor %}
+    </p>
+
+    {% if toy.price_range %}<p><strong>بازه‌ی قیمت:</strong> {{ toy.price_range }}</p>{% endif %}
+
+    {% if toy.affiliate_url %}
+      <a class="btn-buy" href="{{ toy.affiliate_url }}" target="_blank" rel="nofollow noopener">
+        مشاهده و خرید {% if toy.affiliate_source %}از {{ toy.affiliate_source.name }}{% endif %}
+      </a>
+    {% endif %}
+  </div>
+{% endblock %}

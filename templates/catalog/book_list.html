@@ -1,0 +1,19 @@
+﻿{% extends "base.html" %}
+{% block content %}
+  <h1>{% if selected_age_group %}کتاب مناسب {{ selected_age_group.title }}{% else %}کتابخانه{% endif %}</h1>
+  <div class="age-badges">
+    <a href="{% url 'book_list' %}">همه</a>
+    {% for age in age_groups %}
+      <a href="{% url 'book_list_by_age' age.id %}">{{ age.title }}</a>
+    {% endfor %}
+  </div>
+  {% for book in books %}
+    <div class="card">
+      <h3>{{ book.title }} <small>({{ book.get_book_type_display }})</small></h3>
+      <p>{{ book.description }}</p>
+      {% if book.source_url %}<a href="{{ book.source_url }}" target="_blank">مشاهده در {{ book.source_name }}</a>{% endif %}
+    </div>
+  {% empty %}
+    <p>هنوز کتابی برای این سن ثبت نشده.</p>
+  {% endfor %}
+{% endblock %}
