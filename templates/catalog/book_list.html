@@ -1,19 +1,117 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
+
+{% block title %}
+  {% if selected_age_group %}
+    کیدهاب | کتاب‌های {{ selected_age_group.title }}
+  {% else %}
+    کیدهاب | کتاب کودک و کتاب‌های مناسب رشد و یادگیری
+  {% endif %}
+{% endblock %}
+
+{% block meta_description %}
+  {% if selected_age_group %}
+    کتاب‌های مناسب {{ selected_age_group.title }} در کیدهاب؛ انتخاب کتاب کودک بر اساس سن، رشد و نیازهای یادگیری.
+  {% else %}
+    مجموعه کتاب کودک کیدهاب؛ کتاب‌های مناسب کودکان بر اساس سن، موضوع، رشد و نیازهای یادگیری.
+  {% endif %}
+{% endblock %}
+
+{% block og_title %}
+  {% if selected_age_group %}
+    کیدهاب | کتاب‌های {{ selected_age_group.title }}
+  {% else %}
+    کیدهاب | کتاب کودک و کتاب‌های مناسب رشد و یادگیری
+  {% endif %}
+{% endblock %}
+
+{% block og_description %}
+  {% if selected_age_group %}
+    کتاب‌های مناسب {{ selected_age_group.title }} برای رشد، یادگیری و سرگرمی کودک.
+  {% else %}
+    مجموعه‌ای از کتاب‌های کودک مناسب سن، رشد و نیازهای یادگیری در کیدهاب.
+  {% endif %}
+{% endblock %}
+
+{% block twitter_title %}
+  {% if selected_age_group %}
+    کیدهاب | کتاب‌های {{ selected_age_group.title }}
+  {% else %}
+    کیدهاب | کتاب کودک و کتاب‌های مناسب رشد و یادگیری
+  {% endif %}
+{% endblock %}
+
+{% block twitter_description %}
+  {% if selected_age_group %}
+    کتاب‌های مناسب {{ selected_age_group.title }} برای رشد، یادگیری و سرگرمی کودک.
+  {% else %}
+    مجموعه‌ای از کتاب‌های کودک مناسب سن، رشد و نیازهای یادگیری در کیدهاب.
+  {% endif %}
+{% endblock %}
+
 {% block content %}
-  <h1>{% if selected_age_group %}کتاب مناسب {{ selected_age_group.title }}{% else %}کتابخانه{% endif %}</h1>
+  <h1>
+    {% if selected_age_group %}
+      کتاب‌های مناسب {{ selected_age_group.title }}
+    {% else %}
+      کتاب کودک و کتاب‌های مناسب رشد و یادگیری
+    {% endif %}
+  </h1>
+
   <div class="age-badges">
     <a href="{% url 'book_list' %}">همه</a>
     {% for age in age_groups %}
       <a href="{% url 'book_list_by_age' age.id %}">{{ age.title }}</a>
     {% endfor %}
   </div>
+
   {% for book in books %}
     <div class="card">
-      <h3>{{ book.title }} <small>({{ book.get_book_type_display }})</small></h3>
+
+      {% if book.cover_image %}
+        <a href="{% url 'book_detail' book.slug %}">
+          <img
+            src="{{ book.cover_image.url }}"
+            alt="جلد کتاب {{ book.title }}"
+            loading="lazy"
+          >
+        </a>
+      {% endif %}
+
+      <h3>
+        <a href="{% url 'book_detail' book.slug %}">
+          {{ book.title }}
+        </a>
+        <small>({{ book.get_book_type_display }})</small>
+      </h3>
+
+      {% if book.author %}
+        <p><strong>نویسنده:</strong> {{ book.author }}</p>
+      {% endif %}
+
       <p>{{ book.description }}</p>
-      {% if book.source_url %}<a href="{{ book.source_url }}" target="_blank">مشاهده در {{ book.source_name }}</a>{% endif %}
+
+      {% if book.price %}
+        <p><strong>قیمت:</strong> {{ book.price|floatformat:0 }} تومان</p>
+      {% endif %}
+
+      {% if book.purchase_url %}
+        <p>
+          <a href="{{ book.purchase_url }}" target="_blank" rel="nofollow sponsored noopener">
+            خرید کتاب
+          </a>
+        </p>
+      {% endif %}
+
+      {% if book.source_url %}
+        <p>
+          <a href="{{ book.source_url }}" target="_blank" rel="noopener">
+            مشاهده در {{ book.source_name }}
+          </a>
+        </p>
+      {% endif %}
+
     </div>
   {% empty %}
-    <p>هنوز کتابی برای این سن ثبت نشده.</p>
+    <p>هنوز کتابی برای این سن ثبت نشده است.</p>
   {% endfor %}
 {% endblock %}
