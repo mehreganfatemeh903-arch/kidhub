@@ -1,0 +1,71 @@
+﻿OK    ID 28 - extracted og:image from source_url and downloaded
+SKIP  ID 29 - قصه بنیامین خرگوشه -> no source_url or image_url captured, needs manual search
+SKIP  ID 30 - قصه سنجاب ناتکین -> no source_url or image_url captured, needs manual search
+OK    ID 31 - extracted og:image from source_url and downloaded
+SKIP  ID 32 - قصه جمیما اردک -> no source_url or image_url captured, needs manual search
+OK    ID 33 - extracted og:image from source_url and downloaded
+SKIP  ID 34 - نی‌نی چقدر ملوسه، مامان اونو می‌بوسه -> no source_url or image_url captured, needs manual search
+SKIP  ID 35 - مامان اونو می‌بوسه -> no filename (not found / duplicate / needs manual review)
+SKIP  ID 36 - این سر و دست و پاشه، ناف نی‌نی کجاشه؟ -> no source_url or image_url captured, needs manual search
+SKIP  ID 37 - ناف نی‌نی کجاشه؟ -> no filename (not found / duplicate / needs manual review)
+FAIL  ID 38 - could not find og:image on page: https://entesharat.com/product/%D9%86%DB%8C%E2%80%8C%D9%86%DB%8C-%D9%82%D8%A7%D9%85-%D9%82%D8%A7%D9%85/
+SKIP  ID 39 - مامان جون نی‌نی بیا -> no source_url or image_url captured, needs manual search
+SKIP  ID 40 - بچه‌ی من چه شکلیه؟ -> no source_url or image_url captured, needs manual search
+SKIP  ID 41 - دالی چی؟ دالی کی؟ -> no source_url or image_url captured, needs manual search
+SKIP  ID 42 - دالی! یه باغ‌وحش ناز! -> no source_url or image_url captured, needs manual search
+SKIP  ID 43 - تق‌تق، بیا بیرون -> no source_url or image_url captured, needs manual search
+SKIP  ID 44 - نی‌نی عاشق بهاره -> no source_url or image_url captured, needs manual search
+SKIP  ID 45 - نی‌نی عاشق تابستونه -> no source_url or image_url captured, needs manual search
+SKIP  ID 46 - نی‌نی عاشق پاییزه -> no source_url or image_url captured, needs manual search
+SKIP  ID 47 - نی‌نی عاشق زمستونه -> no source_url or image_url captured, needs manual search
+SKIP  ID 48 - نی‌نی قام‌قام و حیوانات -> no filename (not found / duplicate / needs manual review)
+SKIP  ID 49 - کیک نی‌نی کجایی؟ -> no source_url or image_url captured, needs manual search
+SKIP  ID 50 - بزرگ بشم چی می‌شم؟ -> no source_url or image_url captured, needs manual search
+SKIP  ID 51 - مامان و نی‌نی -> no source_url or image_url captured, needs manual search
+SKIP  ID 52 - دالی یه باغ وحش ناز! -> no filename (not found / duplicate / needs manual review)
+SKIP  ID 53 - دالی‌بازی: نی‌نی و حیوانات -> no filename (not found / duplicate / needs manual review)
+SKIP  ID 54 - نی‌نی می‌خواد بره کجا؟ تختخواب -> no source_url or image_url captured, needs manual search
+SKIP  ID 55 - نی‌نی عاشق حیواناته -> no filename (not found / duplicate / needs manual review)
+SKIP  ID 56 - جورچین حیوانات -> no source_url or image_url captured, needs manual search
+SKIP  ID 57 - جورچین آشنایی با حیوانات جنگل -> no source_url or image_url captured, needs manual search
+FAIL  ID 61 - could not find og:image on page: https://entesharat.com/
+FAIL  ID 62 - could not find og:image on page: https://entesharat.com/
+FAIL  ID 63 - could not find og:image on page: https://entesharat.com/
+SKIP  ID 64 - جورج چه چیزی را فراموش کرده؟ -> no source_url or image_url captured, needs manual search
+SKIP  ID 65 - من هم بغل می‌خواهم -> no source_url or image_url captured, needs manual search
+SKIP  ID 66 - نانسی می‌داند -> no source_url or image_url captured, needs manual search
+FAIL  ID 67 - could not find og:image on page: https://hodhod.com/product/%D9%85%D9%86-%D9%86%D8%A8%D9%88%D8%AF%D9%85-2
+SKIP  ID 68 - بنی و برادرش -> no source_url or image_url captured, needs manual search
+SKIP  ID 69 - نگران نباش داگلی بغلی -> no source_url or image_url captured, needs manual search
+SKIP  ID 70 - داگلی بغلی به مدرسه کوچولوها می‌رود -> no source_url or image_url captured, needs manual search
+SKIP  ID 71 - مراقبم باش! -> no source_url or image_url captured, needs manual search
+SKIP  ID 72 - تو کوچولو هستی، نیستی -> no source_url or image_url captured, needs manual search
+SKIP  ID 73 - این مال کیه؟ من، تو -> no source_url or image_url captured, needs manual search
+SKIP  ID 74 - عاشقتم کانگوروی آبی! -> no source_url or image_url captured, needs manual search
+SKIP  ID 75 - اتاق دوست‌داشتنی من -> no source_url or image_url captured, needs manual search
+SKIP  ID 76 - ایزی و راسو -> no source_url or image_url captured, needs manual search
+OK    ID 77 - extracted og:image from source_url and downloaded
+SKIP  ID 78 - آبی -> no source_url or image_url captured, needs manual search
+SKIP  ID 79 - من می‌توانم -> no source_url or image_url captured, needs manual search
+OK    ID 80 - extracted og:image from source_url and downloaded
+SKIP  ID 81 - مامان دیوید همیشه می‌گوید: نه، دیوید! -> no source_url or image_url captured, needs manual search
+OK    ID 82 - extracted og:image from source_url and downloaded
+SKIP  ID 83 - کتاب کار مهارت‌های زندگی - پیش‌دبستانی -> no filename (not found / duplicate / needs manual review)
+SKIP  ID 84 - این گوزن مال من است -> no source_url or image_url captured, needs manual search
+SKIP  ID 85 - لوبی‌ها: من نبودم! -> no filename (not found / duplicate / needs manual review)
+SKIP  ID 86 - دست‌ورزی و کاردستی - مجموعه مرجع پیش‌دبستانی -> no source_url or image_url captured, needs manual search
+SKIP  ID 87 - نقاشی، مهارت و خلاقیت - مجموعه مرجع پیش‌دبستانی -> no source_url or image_url captured, needs manual search
+SKIP  ID 88 - مهارت‌های زندگی - مجموعه مرجع پیش‌دبستانی -> no source_url or image_url captured, needs manual search
+SKIP  ID 89 - ریاضی - مجموعه مرجع پیش‌دبستانی -> no source_url or image_url captured, needs manual search
+SKIP  ID 90 - هوش - مجموعه مرجع پیش‌دبستانی -> no source_url or image_url captured, needs manual search
+OK    ID 91 - extracted og:image from source_url and downloaded
+SKIP  ID 92 - دانش، بهداشت و جهان پیرامون - مجموعه مرجع پیش‌دبستانی -> no source_url or image_url captured, needs manual search
+SKIP  ID 93 - کتاب زبان‌آموزی ۴ تا ۵ سال -> no filename (not found / duplicate / needs manual review)
+SKIP  ID 94 - کودکی با مغز تمام‌عیار -> no source_url or image_url captured, needs manual search
+OK    ID 95 - extracted og:image from source_url and downloaded
+SKIP  ID 96 - وقتی نگرانی‌های من خیلی زیاد می‌شود! -> no source_url or image_url captured, needs manual search
+OK    ID 97 - extracted og:image from source_url and downloaded
+SKIP  ID 98 - انضباط بدون اشک -> no filename (not found / duplicate / needs manual review)
+FAIL  ID 99 - could not fetch source_url (https://www.fasleandisheh.ir/book/the-book-how-to-talk-to-young-children-to-listen-introduced-by-adel-faber/): The request was aborted: The connection was closed unexpectedly.
+OK    ID 100 - extracted og:image from source_url and downloaded
+SKIP  ID 101 - راهکارهای رشد اخلاقی کودکان -> no filename (not found / duplicate / needs manual review)
