@@ -1,20 +1,219 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
+
+{% block title %}کیدهاب | راهنمای هوشمند رشد کودک{% endblock %}
+
+{% block meta_description %}
+  کیدهاب؛ راهنمای هوشمند رشد کودک برای انتخاب کتاب و اسباب‌بازی مناسب بر اساس سن، رشد و نیازهای یادگیری کودک.
+{% endblock %}
+
+{% block og_title %}کیدهاب | راهنمای هوشمند رشد کودک{% endblock %}
+
+{% block og_description %}
+  کیدهاب؛ راهنمای هوشمند رشد کودک برای انتخاب کتاب و اسباب‌بازی مناسب بر اساس سن، رشد و نیازهای یادگیری کودک.
+{% endblock %}
+
+{% block twitter_title %}کیدهاب | راهنمای هوشمند رشد کودک{% endblock %}
+
+{% block twitter_description %}
+  کیدهاب؛ راهنمای هوشمند رشد کودک برای انتخاب کتاب و اسباب‌بازی مناسب بر اساس سن، رشد و نیازهای یادگیری کودک.
+{% endblock %}
+
 {% block content %}
-  <h1>کودک شما چند سالشه؟</h1>
-  <p>بازه‌ی سنی رو انتخاب کن تا اسباب‌بازی و کتاب مناسب رشدش رو ببینی.</p>
+
+<section class="hero">
+  <span class="eyebrow">🌱 همراه رشد کودک</span>
+
+  <h1>انتخاب هوشمندانه برای رشد و یادگیری کودک</h1>
+
+  <p>
+    کتاب‌ها و اسباب‌بازی‌های مناسب را بر اساس سن کودک پیدا کنید و
+    برای رشد زبانی، حرکتی، شناختی و عاطفی انتخاب آگاهانه‌تری داشته باشید.
+  </p>
+
+  <h3>کودک شما چند سالشه؟</h3>
+
   <div class="age-badges">
     {% for age in age_groups %}
-      <a href="{% url 'toy_list_by_age' age.id %}">{{ age.title }}</a>
-    {% endfor %}
-  </div>
+      <div class="age-card">
 
-  {% if latest_articles %}
-    <h2 style="margin-top:32px;">آخرین مطالب</h2>
-    {% for article in latest_articles %}
-      <div class="card">
-        <a href="{{ article.get_absolute_url }}"><strong>{{ article.title }}</strong></a>
-        <p>{{ article.summary }}</p>
+        <strong>{{ age.title }}</strong>
+
+        <div class="age-counts">
+          <span>🧸 {{ age.toys.count }} اسباب‌بازی</span>
+          <span>📚 {{ age.books.count }} کتاب</span>
+        </div>
+
+        <div class="age-actions">
+          <a href="{% url 'toy_list_by_age' age.id %}">
+            مشاهده اسباب‌بازی
+          </a>
+
+          <a href="{% url 'book_list_by_age' age.id %}">
+            مشاهده کتاب‌ها
+          </a>
+        </div>
+
       </div>
     {% endfor %}
-  {% endif %}
+  </div>
+</section>
+
+
+<section class="quick-grid">
+
+  <article class="feature-card">
+    <div class="feature-icon">🧸</div>
+
+    <h2>اسباب‌بازی‌های مناسب سن</h2>
+
+    <p>
+      مجموعه‌ای از اسباب‌بازی‌های انتخاب‌شده بر اساس گروه سنی
+      و نیازهای رشدی کودک.
+    </p>
+
+    <a class="btn-buy" href="{% url 'toy_list' %}">
+      مشاهده اسباب‌بازی‌ها
+    </a>
+  </article>
+
+
+  <article class="feature-card">
+    <div class="feature-icon">📚</div>
+
+    <h2>کتابخانه کودک</h2>
+
+    <p>
+      کتاب‌ها و محتوای مناسب برای سنین مختلف، همراه با اطلاعات
+      کاربردی برای والدین.
+    </p>
+
+    <a class="btn-buy" href="{% url 'book_list' %}">
+      ورود به کتابخانه
+    </a>
+  </article>
+
+</section>
+
+
+<section class="smart-section">
+
+  <div class="section-heading">
+
+    <span class="eyebrow">✨ انتخاب ساده‌تر</span>
+
+    <h2 class="section-title">
+      از سن کودک شروع کنید
+    </h2>
+
+    <p>
+      کافی است گروه سنی کودک را انتخاب کنید تا به محتوای مناسب
+      همان مرحله برسید.
+    </p>
+
+  </div>
+
+
+  <div class="smart-points">
+
+    <div class="smart-point">
+      <span>01</span>
+      <h3>سن کودک</h3>
+      <p>
+        محتوا را بر اساس مرحله رشد کودک پیدا کنید.
+      </p>
+    </div>
+
+
+    <div class="smart-point">
+      <span>02</span>
+      <h3>نیاز رشدی</h3>
+      <p>
+        برای یادگیری، مهارت و رشد بهتر انتخاب کنید.
+      </p>
+    </div>
+
+
+    <div class="smart-point">
+      <span>03</span>
+      <h3>انتخاب آگاهانه</h3>
+      <p>
+        اطلاعات کتاب‌ها و محصولات را قبل از انتخاب بررسی کنید.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+{% if latest_articles %}
+
+<section class="articles-section">
+
+  <div class="section-heading">
+
+    <span class="eyebrow">📝 محتوای والدین</span>
+
+    <h2 class="section-title">
+      آخرین مطالب کیدهاب
+    </h2>
+
+    <p>
+      مطالب کاربردی برای والدین درباره رشد، یادگیری و انتخاب
+      مناسب برای کودک.
+    </p>
+
+  </div>
+
+
+  <div class="articles-grid">
+
+    {% for article in latest_articles %}
+
+      <article class="article-card">
+
+        <h3>
+          <a href="{{ article.get_absolute_url }}">
+            {{ article.title }}
+          </a>
+        </h3>
+
+        {% if article.summary %}
+          <p>{{ article.summary }}</p>
+        {% endif %}
+
+        <a class="article-link" href="{{ article.get_absolute_url }}">
+          مطالعه مطلب ←
+        </a>
+
+      </article>
+
+    {% endfor %}
+
+  </div>
+
+</section>
+
+{% endif %}
+
+
+<section class="trust-section">
+
+  <div>
+
+    <span class="eyebrow">💚 برای والدین</span>
+
+    <h2>
+      کیدهاب فقط یک فهرست محصول نیست
+    </h2>
+
+    <p>
+      هدف کیدهاب کمک به والدین برای پیدا کردن محتوای مناسب
+      و تصمیم‌گیری آگاهانه بر اساس سن و نیازهای رشدی کودک است.
+    </p>
+
+  </div>
+
+</section>
+
 {% endblock %}
