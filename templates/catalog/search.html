@@ -1,0 +1,629 @@
+{% extends "base.html" %}
+
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
+
+{% block title %}جست‌وجوی هوشمند | کیدهاب{% endblock %}
+
+{% block meta_description %}
+  جست‌وجوی هوشمند کیدهاب برای پیدا کردن کتاب و اسباب‌بازی مناسب کودک بر اساس سن، حوزه رشدی و نیازهای یادگیری.
+{% endblock %}
+
+{% block og_title %}جست‌وجوی هوشمند | کیدهاب{% endblock %}
+
+{% block og_description %}
+  جست‌وجوی هوشمند کیدهاب برای پیدا کردن کتاب و اسباب‌بازی مناسب کودک بر اساس سن، حوزه رشدی و نیازهای یادگیری.
+{% endblock %}
+
+{% block twitter_title %}جست‌وجوی هوشمند | کیدهاب{% endblock %}
+
+{% block twitter_description %}
+  جست‌وجوی هوشمند کیدهاب برای پیدا کردن کتاب و اسباب‌بازی مناسب کودک بر اساس سن، حوزه رشدی و نیازهای یادگیری.
+{% endblock %}
+
+{% block content %}
+
+<style>
+  .kh-search-page {
+    direction: rtl;
+  }
+
+  .kh-search-hero {
+    background: linear-gradient(135deg, #f0fdf9 0%, #eef7ff 55%, #fff7ed 100%);
+    border: 1px solid #e2eee9;
+    border-radius: 28px;
+    padding: 42px 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 35px rgba(25, 70, 60, 0.07);
+  }
+
+  .kh-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #ffffff;
+    color: #147d69;
+    border: 1px solid #d7eee7;
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .kh-search-hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.35;
+    color: #18352f;
+  }
+
+  .kh-search-hero p {
+    color: #5f706c;
+    margin: 0 0 24px;
+    line-height: 1.9;
+  }
+
+  .kh-search-box {
+    display: flex;
+    gap: 10px;
+    background: #fff;
+    padding: 8px;
+    border-radius: 18px;
+    border: 1px solid #dce8e4;
+    box-shadow: 0 8px 24px rgba(20, 60, 50, 0.08);
+  }
+
+  .kh-search-box input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    padding: 13px 16px;
+    font-size: 16px;
+    background: transparent;
+    color: #263a35;
+  }
+
+  .kh-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 0;
+    border-radius: 13px;
+    padding: 11px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+
+  .kh-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .kh-btn-primary {
+    background: #16856f;
+    color: #fff;
+    box-shadow: 0 7px 18px rgba(22, 133, 111, .22);
+  }
+
+  .kh-btn-primary:hover {
+    background: #116f5e;
+    color: #fff;
+  }
+
+  .kh-btn-light {
+    background: #f1f7f5;
+    color: #176b5b;
+    border: 1px solid #dcece7;
+  }
+
+  .kh-btn-light:hover {
+    background: #e6f2ee;
+    color: #145e50;
+  }
+
+  .kh-filter-card {
+    background: #fff;
+    border: 1px solid #e3ebe8;
+    border-radius: 24px;
+    padding: 26px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 28px rgba(30, 60, 50, .06);
+  }
+
+  .kh-section-head {
+    margin-bottom: 20px;
+  }
+
+  .kh-section-head h2 {
+    margin: 5px 0 7px;
+    color: #18352f;
+    font-size: 25px;
+  }
+
+  .kh-section-head p {
+    margin: 0;
+    color: #71817d;
+  }
+
+  .kh-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
+
+  .kh-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .kh-filter-field span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #4d625d;
+  }
+
+  .kh-filter-field select {
+    width: 100%;
+    border: 1px solid #d9e5e1;
+    background: #f9fcfb;
+    color: #263a35;
+    border-radius: 13px;
+    padding: 12px 13px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .kh-filter-field select:focus {
+    border-color: #16856f;
+    box-shadow: 0 0 0 3px rgba(22, 133, 111, .10);
+  }
+
+  .kh-filter-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .kh-results {
+    margin-top: 10px;
+  }
+
+  .kh-results-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+
+  .kh-results-head h2 {
+    margin: 0;
+    color: #18352f;
+  }
+
+  .kh-result-count {
+    background: #eef8f5;
+    color: #17705f;
+    border: 1px solid #d8eee7;
+    border-radius: 999px;
+    padding: 7px 13px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .kh-category-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0 16px;
+    color: #21453d;
+  }
+
+  .kh-category-title span {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #f0f8f5;
+  }
+
+  .kh-results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .kh-result-card {
+    background: #fff;
+    border: 1px solid #e4ebe9;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 7px 24px rgba(30, 60, 50, .06);
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+
+  .kh-result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 32px rgba(30, 60, 50, .11);
+    border-color: #cde4dd;
+  }
+
+  .kh-result-image {
+    height: 220px;
+    padding: 15px;
+    background: linear-gradient(135deg, #f8fbfa, #f4f8ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .kh-result-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 14px;
+  }
+
+  .kh-result-image.kh-no-image {
+    color: #94a39f;
+    font-size: 42px;
+  }
+
+  .kh-result-body {
+    padding: 19px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .kh-result-body h3 {
+    margin: 0 0 9px;
+    font-size: 18px;
+    line-height: 1.65;
+    color: #213d36;
+  }
+
+  .kh-result-body p {
+    color: #687873;
+    font-size: 14px;
+    line-height: 1.85;
+    margin: 0 0 17px;
+  }
+
+  .kh-result-link {
+    margin-top: auto;
+  }
+
+  .kh-empty {
+    background: linear-gradient(135deg, #f8fbfa, #f8faff);
+    border: 1px dashed #cbdcd7;
+    border-radius: 24px;
+    padding: 45px 25px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .kh-empty-icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+  }
+
+  .kh-empty h2 {
+    color: #24423b;
+    margin: 0 0 8px;
+  }
+
+  .kh-empty p {
+    color: #70807b;
+    margin: 0;
+  }
+
+  .kh-welcome {
+    background: linear-gradient(135deg, #f1faf7, #f4f8ff);
+    border-radius: 24px;
+    padding: 35px 25px;
+    text-align: center;
+    border: 1px solid #e0ebe8;
+  }
+
+  .kh-welcome h2 {
+    margin: 0 0 10px;
+    color: #20433a;
+  }
+
+  .kh-welcome p {
+    margin: 0;
+    color: #687873;
+    line-height: 1.9;
+  }
+
+  @media (max-width: 950px) {
+    .kh-filter-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .kh-results-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 650px) {
+    .kh-search-hero {
+      padding: 28px 18px;
+      border-radius: 20px;
+    }
+
+    .kh-search-box {
+      flex-direction: column;
+    }
+
+    .kh-search-box .kh-btn {
+      width: 100%;
+    }
+
+    .kh-filter-card {
+      padding: 18px;
+      border-radius: 20px;
+    }
+
+    .kh-filter-grid,
+    .kh-results-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .kh-results-head {
+      align-items: flex-start;
+    }
+
+    .kh-filter-actions {
+      flex-direction: column;
+    }
+
+    .kh-filter-actions .kh-btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="kh-search-page">
+
+  <section class="kh-search-hero">
+    <span class="kh-eyebrow">🔎 جست‌وجوی هوشمند کیدهاب</span>
+
+    <h1>دنبال چه چیزی برای کودک هستید؟</h1>
+
+    <p>
+      کتاب، اسباب‌بازی و محتوای مناسب کودک را بر اساس سن و نیاز رشدی پیدا کنید.
+    </p>
+
+    <form method="get" action="{% url 'search' %}" class="kh-search-box">
+      <input
+        type="search"
+        name="q"
+        value="{{ query }}"
+        placeholder="مثلاً پازل، زبان، خلاقیت یا کتاب..."
+        aria-label="جست‌وجو"
+      >
+      <button class="kh-btn kh-btn-primary" type="submit">
+        🔎 جست‌وجو
+      </button>
+    </form>
+  </section>
+
+  <section class="kh-filter-card">
+    <div class="kh-section-head">
+      <span class="kh-eyebrow">🎯 انتخاب دقیق‌تر</span>
+      <h2>فیلترهای هوشمند</h2>
+      <p>با چند انتخاب ساده، نتیجه مناسب کودک را سریع‌تر پیدا کنید.</p>
+    </div>
+
+    <form method="get" action="{% url 'search' %}">
+      <input type="hidden" name="q" value="{{ query }}">
+
+      <div class="kh-filter-grid">
+
+        <label class="kh-filter-field">
+          <span>👶 سن کودک</span>
+          <select name="age">
+            <option value="">همه سنین</option>
+            {% for age in age_groups %}
+              <option value="{{ age.id }}" {% if selected_age == age.id|stringformat:"s" %}selected{% endif %}>
+                {{ age.title }}
+              </option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label class="kh-filter-field">
+          <span>🌱 حوزه رشدی</span>
+          <select name="area">
+            <option value="">همه حوزه‌ها</option>
+            {% for area in development_areas %}
+              <option value="{{ area.id }}" {% if selected_area == area.id|stringformat:"s" %}selected{% endif %}>
+                {% if area.icon %}{{ area.icon }} {% endif %}{{ area.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label class="kh-filter-field">
+          <span>📚 نوع محتوا</span>
+          <select name="type">
+            <option value="all" {% if selected_type == "all" %}selected{% endif %}>همه محتواها</option>
+            <option value="toys" {% if selected_type == "toys" %}selected{% endif %}>🧸 فقط اسباب‌بازی</option>
+            <option value="books" {% if selected_type == "books" %}selected{% endif %}>📚 فقط کتاب</option>
+          </select>
+        </label>
+
+        <label class="kh-filter-field">
+          <span>↕️ مرتب‌سازی</span>
+          <select name="sort">
+            <option value="newest" {% if selected_sort == "newest" %}selected{% endif %}>جدیدترین</option>
+            <option value="oldest" {% if selected_sort == "oldest" %}selected{% endif %}>قدیمی‌ترین</option>
+            <option value="title" {% if selected_sort == "title" %}selected{% endif %}>الفبایی</option>
+          </select>
+        </label>
+
+      </div>
+
+      <div class="kh-filter-actions">
+        <button class="kh-btn kh-btn-primary" type="submit">
+          ✨ اعمال فیلترها
+        </button>
+
+        <a class="kh-btn kh-btn-light" href="{% url 'search' %}">
+          ↺ پاک کردن فیلترها
+        </a>
+      </div>
+    </form>
+  </section>
+
+  {% if query or selected_age or selected_area or selected_type != "all" %}
+
+    <section class="kh-results">
+
+      <div class="kh-results-head">
+        <div>
+          <span class="kh-eyebrow">نتایج</span>
+          <h2>
+            {% if query %}
+              نتایج برای «{{ query }}»
+            {% else %}
+              نتایج فیلترشده
+            {% endif %}
+          </h2>
+        </div>
+
+        <div class="kh-result-count">
+          {{ toys|length|add:books|length }} نتیجه
+        </div>
+      </div>
+
+      {% if toys %}
+        <h2 class="kh-category-title">
+          <span>🧸</span>
+          اسباب‌بازی‌ها
+        </h2>
+
+        <div class="kh-results-grid">
+          {% for toy in toys %}
+            <article class="kh-result-card">
+
+              {% if toy.image %}
+                <div class="kh-result-image">
+                  <img
+                    src="{{ toy.image.url }}"
+                    alt="{{ toy.title }}"
+                    loading="lazy"
+                  >
+                </div>
+              {% else %}
+                <div class="kh-result-image kh-no-image">🧸</div>
+              {% endif %}
+
+              <div class="kh-result-body">
+                <h3>{{ toy.title }}</h3>
+
+                {% if toy.short_description %}
+                  <p>{{ toy.short_description }}</p>
+                {% endif %}
+
+                <a
+                  class="kh-btn kh-btn-primary kh-result-link"
+                  href="{{ toy.get_absolute_url }}"
+                >
+                  مشاهده اسباب‌بازی ←
+                </a>
+              </div>
+
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if books %}
+        <h2 class="kh-category-title">
+          <span>📚</span>
+          کتاب‌ها
+        </h2>
+
+        <div class="kh-results-grid">
+          {% for book in books %}
+            <article class="kh-result-card">
+
+              {% if book.cover_image %}
+                <div class="kh-result-image">
+                  <img
+                    src="{{ book.cover_image.url }}"
+                    alt="{{ book.title }}"
+                    loading="lazy"
+                  >
+                </div>
+              {% else %}
+                <div class="kh-result-image kh-no-image">📚</div>
+              {% endif %}
+
+              <div class="kh-result-body">
+                <h3>{{ book.title }}</h3>
+
+                {% if book.author %}
+                  <p><strong>نویسنده:</strong> {{ book.author }}</p>
+                {% endif %}
+
+                <p>{{ book.description|truncatechars:180 }}</p>
+
+                <a
+                  class="kh-btn kh-btn-primary kh-result-link"
+                  href="{{ book.get_absolute_url }}"
+                >
+                  مشاهده کتاب ←
+                </a>
+              </div>
+
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if not toys and not books %}
+        <div class="kh-empty">
+          <div class="kh-empty-icon">🔎</div>
+          <h2>نتیجه‌ای پیدا نشد</h2>
+          <p>
+            عبارت جست‌وجو یا فیلترها را تغییر دهید تا گزینه‌های بیشتری ببینید.
+          </p>
+        </div>
+      {% endif %}
+
+    </section>
+
+  {% else %}
+
+    <section class="kh-welcome">
+      <span class="kh-eyebrow">💚 انتخاب آگاهانه</span>
+      <h2>جست‌وجوی هوشمند کیدهاب</h2>
+      <p>
+        نام کتاب، اسباب‌بازی، مهارت یا موضوع موردنظر را وارد کنید
+        یا از فیلترهای بالا برای پیدا کردن گزینه مناسب استفاده کنید.
+      </p>
+    </section>
+
+  {% endif %}
+
+</div>
+
+{% endblock %}
+
+

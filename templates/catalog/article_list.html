@@ -1,0 +1,55 @@
+﻿{% extends "base.html" %}
+
+{% block title %}مقالات والدین | کیدهاب{% endblock %}
+
+{% block meta_description %}
+مقالات کاربردی کیدهاب درباره رشد، یادگیری، تربیت و انتخاب مناسب برای کودک.
+{% endblock %}
+
+{% block og_title %}مقالات والدین | کیدهاب{% endblock %}
+
+{% block og_description %}
+مقالات کاربردی کیدهاب درباره رشد، یادگیری، تربیت و انتخاب مناسب برای کودک.
+{% endblock %}
+
+{% block twitter_title %}مقالات والدین | کیدهاب{% endblock %}
+
+{% block twitter_description %}
+مقالات کاربردی کیدهاب درباره رشد، یادگیری، تربیت و انتخاب مناسب برای کودک.
+{% endblock %}
+
+{% block content %}
+<section class="articles-section">
+  <div class="section-heading">
+    <span class="eyebrow">📝 محتوای والدین</span>
+    <h1 class="section-title">مقالات کیدهاب</h1>
+    <p>
+      مطالب کاربردی برای والدین درباره رشد، یادگیری و انتخاب مناسب برای کودک.
+    </p>
+  </div>
+
+  {% if articles %}
+    <div class="articles-grid">
+      {% for article in articles %}
+        <article class="article-card">
+          <h2>
+            <a href="{{ article.get_absolute_url }}">
+              {{ article.title }}
+            </a>
+          </h2>
+
+          {% if article.summary %}
+            <p>{{ article.summary }}</p>
+          {% endif %}
+
+          <a class="article-link" href="{{ article.get_absolute_url }}">
+            مطالعه مطلب ←
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>هنوز مقاله‌ای منتشر نشده است.</p>
+  {% endif %}
+</section>
+{% endblock %}
