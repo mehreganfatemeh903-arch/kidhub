@@ -1,23 +1,235 @@
 ﻿{% extends "base.html" %}
+
+{% block title %}کیدهاب | {{ toy.title }}{% endblock %}
+
+{% block meta_description %}
+  {% if toy.short_description %}
+    {{ toy.short_description|striptags|truncatechars:155 }}
+  {% elif toy.why_it_helps %}
+    {{ toy.why_it_helps|striptags|truncatechars:155 }}
+  {% else %}
+    معرفی {{ toy.title }} در کیدهاب؛ اطلاعات اسباب‌بازی و کاربرد آن برای بازی، یادگیری و رشد کودک.
+  {% endif %}
+{% endblock %}
+
+{% block og_title %}کیدهاب | {{ toy.title }}{% endblock %}
+
+{% block og_description %}
+  {% if toy.short_description %}
+    {{ toy.short_description|striptags|truncatechars:155 }}
+  {% elif toy.why_it_helps %}
+    {{ toy.why_it_helps|striptags|truncatechars:155 }}
+  {% else %}
+    معرفی {{ toy.title }} در کیدهاب؛ اطلاعات اسباب‌بازی و کاربرد آن برای بازی، یادگیری و رشد کودک.
+  {% endif %}
+{% endblock %}
+
+{% block twitter_title %}کیدهاب | {{ toy.title }}{% endblock %}
+
+{% block twitter_description %}
+  {% if toy.short_description %}
+    {{ toy.short_description|striptags|truncatechars:155 }}
+  {% elif toy.why_it_helps %}
+    {{ toy.why_it_helps|striptags|truncatechars:155 }}
+  {% else %}
+    معرفی {{ toy.title }} در کیدهاب؛ اطلاعات اسباب‌بازی و کاربرد آن برای بازی، یادگیری و رشد کودک.
+  {% endif %}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ toy.title|escapejs }}",
+  "description": "{{ toy.short_description|default:toy.why_it_helps|striptags|escapejs }}",
+  "url": "{{ request.build_absolute_uri }}"{% if toy.image %},
+  "image": "{{ request.scheme }}://{{ request.get_host }}{{ toy.image.url }}"{% endif %}{% if toy.affiliate_url %},
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ toy.affiliate_url|escapejs }}"
+  }{% endif %}
+}
+</script><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "خانه",
+      "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "اسباب‌بازی‌ها",
+      "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'toy_list' %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ toy.title|escapejs }}",
+      "item": "{{ request.build_absolute_uri }}"
+    }
+  ]
+}
+</script>
+{% endblock %}
 {% block content %}
-  <div class="card">
-    {% if toy.image %}<img src="{{ toy.image.url }}" style="max-width:100%;border-radius:8px;">{% endif %}
-    <h1>{{ toy.title }}</h1>
-    <p>{{ toy.short_description }}</p>
 
-    <h3>چرا برای رشد کودک مفیده؟</h3>
-    <p>{{ toy.why_it_helps }}</p>
+<div class="card" style="
+  max-width:900px;
+  margin:0 auto;
+  padding:0;
+  overflow:hidden;
+">
 
-    <p><strong>مناسب برای:</strong>
-      {% for age in toy.age_groups.all %}{{ age.title }}{% if not forloop.last %}، {% endif %}{% endfor %}
+  {% if toy.image %}
+    <img
+      src="{{ toy.image.url }}"
+      alt="{{ toy.title }}"
+      style="
+        width:100%;
+        max-height:430px;
+        object-fit:cover;
+        display:block;
+      "
+    >
+  {% endif %}
+
+  <div style="padding:32px;">
+
+    <div style="
+      display:inline-block;
+      background:#fff0df;
+      color:#b85c00;
+      padding:7px 14px;
+      border-radius:20px;
+      font-size:13px;
+      font-weight:bold;
+      margin-bottom:14px;
+    ">
+      🧸 اسباب‌بازی پیشنهادی
+    </div>
+
+    <h1 style="
+      margin-top:0;
+      font-size:32px;
+      line-height:1.6;
+    ">
+      {{ toy.title }}
+    </h1>
+
+    <p style="
+      font-size:17px;
+      color:#6f625b;
+      line-height:2;
+    ">
+      {{ toy.short_description }}
     </p>
 
-    {% if toy.price_range %}<p><strong>بازه‌ی قیمت:</strong> {{ toy.price_range }}</p>{% endif %}
+    <div style="
+      margin-top:28px;
+      padding:20px;
+      background:#fffaf5;
+      border-radius:14px;
+      border-right:4px solid #ff9a76;
+    ">
+      <h3 style="margin-top:0;">🌱 چرا برای رشد کودک مفیده؟</h3>
+      <p style="margin-bottom:0;line-height:2.1;">
+        {{ toy.why_it_helps }}
+      </p>
+    </div>
 
-    {% if toy.affiliate_url %}
-      <a class="btn-buy" href="{{ toy.affiliate_url }}" target="_blank" rel="nofollow noopener">
-        مشاهده و خرید {% if toy.affiliate_source %}از {{ toy.affiliate_source.name }}{% endif %}
-      </a>
+    <div style="margin-top:26px;">
+
+      <strong>👶 مناسب برای:</strong>
+
+      {% for age in toy.age_groups.all %}
+        <span style="
+          display:inline-block;
+          background:#fff0df;
+          color:#b85c00;
+          padding:6px 12px;
+          border-radius:12px;
+          margin:5px;
+          font-size:13px;
+        ">
+          {{ age.title }}
+        </span>
+      {% endfor %}
+
+    </div>
+
+    {% if toy.price_range %}
+      <div style="
+        margin-top:22px;
+        padding:14px 18px;
+        background:#f4fbf7;
+        border-radius:12px;
+      ">
+        <strong>💰 بازه قیمت:</strong>
+        {{ toy.price_range }}
+      </div>
     {% endif %}
+
+    {% if toy.development_areas.all %}
+      <div style="margin-top:24px;">
+        <strong>🧠 حوزه‌های رشدی:</strong>
+
+        {% for area in toy.development_areas.all %}
+          <span style="
+            display:inline-block;
+            background:#f5f5f5;
+            color:#555;
+            padding:6px 12px;
+            border-radius:12px;
+            margin:5px;
+            font-size:13px;
+          ">
+            {{ area.name }}
+          </span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div style="margin-top:30px;">
+
+      {% if toy.affiliate_url %}
+        <a
+          class="btn-buy"
+          href="{{ toy.affiliate_url }}"
+          target="_blank"
+          rel="nofollow noopener"
+        >
+          🛒 مشاهده و خرید
+          {% if toy.affiliate_source %}
+            از {{ toy.affiliate_source.name }}
+          {% endif %}
+        </a>
+      {% endif %}
+
+      <a
+        href="{% url 'toy_list' %}"
+        style="
+          display:inline-block;
+          margin-right:10px;
+          padding:10px 18px;
+          border:1px solid #ffd5b5;
+          border-radius:10px;
+          text-decoration:none;
+          color:#b85c00;
+        "
+      >
+        ← بازگشت به اسباب‌بازی‌ها
+      </a>
+
+    </div>
+
   </div>
+
+</div>
+
 {% endblock %}
