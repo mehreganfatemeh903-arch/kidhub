@@ -42,7 +42,7 @@ class Toy(models.Model):
     why_it_helps = models.TextField()
     image = models.ImageField(upload_to="toys/", blank=True, null=True)
     affiliate_source = models.ForeignKey(AffiliateSource, on_delete=models.SET_NULL, null=True, blank=True)
-    affiliate_url = models.URLField(blank=True)
+    affiliate_url = models.URLField(max_length=500, blank=True)
     price_range = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -72,13 +72,13 @@ class Book(models.Model):
     translator = models.CharField(max_length=200, blank=True)
     publisher = models.CharField(max_length=200, blank=True)
     source_name = models.CharField(max_length=100, blank=True)
-    source_url = models.URLField(blank=True)
-    purchase_url = models.URLField(blank=True)
+    source_url = models.URLField(max_length=500, blank=True)
+    purchase_url = models.URLField(max_length=500, blank=True)
     price = models.PositiveIntegerField(null=True, blank=True)
     topic = models.CharField(max_length=200, blank=True)
     developmental_benefit = models.TextField(blank=True)
     evidence_source_name = models.CharField(max_length=200, blank=True)
-    evidence_source_url = models.URLField(blank=True)
+    evidence_source_url = models.URLField(max_length=500, blank=True)
     awards = models.TextField(blank=True)
     is_parent_guide = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -99,7 +99,7 @@ class Article(models.Model):
     summary = models.CharField(max_length=300)
     body = models.TextField()
     source_name = models.CharField(max_length=200, blank=True)
-    source_url = models.URLField(blank=True)
+    source_url = models.URLField(max_length=500, blank=True)
     published_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -160,7 +160,7 @@ class Lullaby(models.Model):
     lyrics = models.TextField(blank=True)
     audio_file = models.FileField(upload_to="lullabies/", blank=True, null=True)
     source_name = models.CharField(max_length=200, blank=True)
-    source_url = models.URLField(blank=True)
+    source_url = models.URLField(max_length=500, blank=True)
     is_public_domain = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
