@@ -1,4 +1,53 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
+
+{% block title %}
+  {% if selected_age_group %}
+    کیدهاب | اسباب‌بازی مناسب {{ selected_age_group.title }}
+  {% else %}
+    کیدهاب | اسباب‌بازی‌های پیشنهادی
+  {% endif %}
+{% endblock %}
+
+{% block meta_description %}
+  {% if selected_age_group %}
+    اسباب‌بازی‌های مناسب {{ selected_age_group.title }} در کیدهاب؛ انتخاب آگاهانه برای بازی، یادگیری و رشد مهارت‌های کودک.
+  {% else %}
+    اسباب‌بازی‌های پیشنهادی کیدهاب؛ انتخاب اسباب‌بازی مناسب کودک بر اساس سن، مهارت‌های رشدی و نیازهای یادگیری.
+  {% endif %}
+{% endblock %}
+
+{% block og_title %}
+  {% if selected_age_group %}
+    کیدهاب | اسباب‌بازی مناسب {{ selected_age_group.title }}
+  {% else %}
+    کیدهاب | اسباب‌بازی‌های پیشنهادی
+  {% endif %}
+{% endblock %}
+
+{% block og_description %}
+  {% if selected_age_group %}
+    اسباب‌بازی‌های مناسب {{ selected_age_group.title }} در کیدهاب؛ انتخاب آگاهانه برای بازی، یادگیری و رشد مهارت‌های کودک.
+  {% else %}
+    اسباب‌بازی‌های پیشنهادی کیدهاب؛ انتخاب اسباب‌بازی مناسب کودک بر اساس سن، مهارت‌های رشدی و نیازهای یادگیری.
+  {% endif %}
+{% endblock %}
+
+{% block twitter_title %}
+  {% if selected_age_group %}
+    کیدهاب | اسباب‌بازی مناسب {{ selected_age_group.title }}
+  {% else %}
+    کیدهاب | اسباب‌بازی‌های پیشنهادی
+  {% endif %}
+{% endblock %}
+
+{% block twitter_description %}
+  {% if selected_age_group %}
+    اسباب‌بازی‌های مناسب {{ selected_age_group.title }} در کیدهاب؛ انتخاب آگاهانه برای بازی، یادگیری و رشد مهارت‌های کودک.
+  {% else %}
+    اسباب‌بازی‌های پیشنهادی کیدهاب؛ انتخاب اسباب‌بازی مناسب کودک بر اساس سن، مهارت‌های رشدی و نیازهای یادگیری.
+  {% endif %}
+{% endblock %}
+
 {% block content %}
   <h1>{% if selected_age_group %}اسباب‌بازی مناسب {{ selected_age_group.title }}{% else %}همه‌ی اسباب‌بازی‌ها{% endif %}</h1>
 
