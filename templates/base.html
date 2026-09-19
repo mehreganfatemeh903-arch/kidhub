@@ -1,29 +1,518 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}راهنمای رشد کودک{% endblock %}</title>
+
+  <title>{% block title %}کیدهاب | راهنمای رشد و یادگیری کودک{% endblock %}</title>
+
+  <meta name="description" content="{% block meta_description %}کیدهاب؛ راهنمای انتخاب کتاب، اسباب‌بازی و محتوای مناسب برای رشد و یادگیری کودک.{% endblock %}">
+  <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  {% block robots %}<meta name="robots" content="index, follow">{% endblock %}
+<meta property="og:title" content="{% block og_title %}کیدهاب | راهنمای رشد و یادگیری کودک{% endblock %}">
+<meta property="og:description" content="{% block og_description %}کیدهاب؛ راهنمای انتخاب کتاب، اسباب‌بازی و محتوای مناسب برای رشد و یادگیری کودک.{% endblock %}">
+<meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="کیدهاب">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{% block twitter_title %}کیدهاب | راهنمای رشد و یادگیری کودک{% endblock %}">
+<meta name="twitter:description" content="{% block twitter_description %}کیدهاب؛ راهنمای انتخاب کتاب، اسباب‌بازی و محتوای مناسب برای رشد و یادگیری کودک.{% endblock %}">
+  <meta name="theme-color" content="#f47f5f">
+
   <style>
-    body { font-family: Tahoma, sans-serif; margin: 0; background: #fdf9f3; color: #333; }
-    header { background: #ff9f68; padding: 16px 24px; }
-    header a { color: white; text-decoration: none; font-weight: bold; margin-left: 16px; }
-    .container { max-width: 1000px; margin: 0 auto; padding: 24px; }
-    .card { background: white; border-radius: 10px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-    .age-badges a { display: inline-block; background: #ffe3cc; padding: 6px 14px; border-radius: 20px; margin: 4px; text-decoration: none; color: #b85c00; font-size: 14px; }
-    .btn-buy { display: inline-block; background: #2e8b57; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; margin-top: 8px; }
-    footer { text-align: center; padding: 24px; color: #999; font-size: 13px; }
+    :root {
+      --kh-primary: #f47f5f;
+      --kh-primary-dark: #d96548;
+      --kh-secondary: #69a987;
+      --kh-secondary-dark: #4d896b;
+      --kh-cream: #fffaf5;
+      --kh-white: #ffffff;
+      --kh-text: #29343a;
+      --kh-muted: #746a64;
+      --kh-border: #eee3da;
+      --kh-soft: #fff1e7;
+      --kh-shadow: 0 10px 30px rgba(80, 55, 40, 0.08);
+      --kh-radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(255, 215, 185, 0.18), transparent 28%),
+        var(--kh-cream);
+      color: var(--kh-text);
+      line-height: 1.8;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* =========================
+       HEADER
+       ========================= */
+
+    .kh-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid rgba(238, 227, 218, 0.9);
+      box-shadow: 0 5px 22px rgba(80, 55, 40, 0.06);
+      backdrop-filter: blur(12px);
+    }
+
+    .kh-nav {
+      max-width: 1180px;
+      margin: 0 auto;
+      min-height: 76px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .kh-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #3c302a;
+      white-space: nowrap;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+    }
+
+    .kh-brand-icon {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #fff0df, #ffe0cf);
+      box-shadow: 0 5px 15px rgba(244, 127, 95, 0.12);
+      font-size: 22px;
+    }
+
+    .kh-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+
+    .kh-brand-name {
+      color: var(--kh-primary-dark);
+    }
+
+    .kh-brand-subtitle {
+      color: #95877f;
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .kh-nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .kh-nav-links a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 13px;
+      border-radius: 12px;
+      color: #554941;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .kh-nav-links a:hover {
+      background: var(--kh-soft);
+      color: var(--kh-primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .kh-nav-search {
+      background: #f8f3ef !important;
+      color: #5d5149 !important;
+    }
+
+    .kh-nav-search:hover {
+      background: #eee6df !important;
+      color: #493d36 !important;
+    }
+
+    /* =========================
+       MAIN
+       ========================= */
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 38px 24px 60px;
+      min-height: 70vh;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 90% 20%, rgba(255,255,255,0.75), transparent 30%),
+        linear-gradient(135deg, #fff0df, #fffaf5);
+      border-radius: 26px;
+      padding: 42px 34px;
+      margin-bottom: 34px;
+      border: 1px solid #ffe2ca;
+      box-shadow: var(--kh-shadow);
+    }
+
+    .hero h1 {
+      margin-top: 0;
+      font-size: 34px;
+      line-height: 1.45;
+      color: #49352b;
+    }
+
+    .hero p {
+      color: var(--kh-muted);
+      max-width: 760px;
+    }
+
+    .section-title {
+      margin: 38px 0 18px;
+      color: #49352b;
+      font-size: 24px;
+    }
+
+    .card {
+      background: var(--kh-white);
+      border-radius: var(--kh-radius);
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: var(--kh-shadow);
+      border: 1px solid var(--kh-border);
+    }
+
+    .card h2,
+    .card h3 {
+      margin-top: 0;
+      color: #49352b;
+    }
+
+    .card a {
+      text-decoration: none;
+    }
+
+    .card a:hover {
+      color: var(--kh-primary-dark);
+    }
+
+    /* =========================
+       AGE BADGES
+       ========================= */
+
+    .age-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .age-badges a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--kh-white);
+      padding: 10px 17px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: #a95b20;
+      font-size: 14px;
+      font-weight: 800;
+      border: 1px solid #ffd5b5;
+      transition: 0.2s ease;
+    }
+
+    .age-badges a:hover {
+      background: #fff0df;
+      transform: translateY(-2px);
+      box-shadow: 0 7px 18px rgba(180, 100, 45, 0.1);
+    }
+
+    /* =========================
+       BUTTONS
+       ========================= */
+
+    .btn-buy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--kh-secondary);
+      color: white !important;
+      padding: 10px 18px;
+      border-radius: 11px;
+      text-decoration: none !important;
+      margin-top: 10px;
+      font-weight: 800;
+      border: 0;
+      transition: 0.2s ease;
+    }
+
+    .btn-buy:hover {
+      background: var(--kh-secondary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 7px 18px rgba(77, 137, 107, 0.18);
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .kh-footer {
+      margin-top: 30px;
+      background: #3d332e;
+      color: #eee4de;
+    }
+
+    .kh-footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 42px 24px 24px;
+    }
+
+    .kh-footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 35px;
+    }
+
+    .kh-footer-brand {
+      font-size: 22px;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .kh-footer h3 {
+      margin-top: 0;
+      color: white;
+      font-size: 16px;
+    }
+
+    .kh-footer p {
+      color: #cdbfb7;
+      font-size: 13px;
+      margin: 7px 0;
+    }
+
+    .kh-footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .kh-footer-links a {
+      color: #d9cbc3;
+      text-decoration: none;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .kh-footer-links a:hover {
+      color: #ffb294;
+      transform: translateX(-3px);
+    }
+
+    .kh-footer-bottom {
+      margin-top: 30px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      color: #b9aaa2;
+      font-size: 12px;
+    }
+
+    .kh-footer-note {
+      margin-top: 5px;
+      color: #998a82;
+      font-size: 11px;
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 820px) {
+      .kh-nav {
+        min-height: auto;
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .kh-brand {
+        justify-content: center;
+      }
+
+      .kh-nav-links {
+        width: 100%;
+      }
+
+      .kh-nav-links a {
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+
+      .kh-footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 24px 15px 42px;
+      }
+
+      .kh-nav-links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+      }
+
+      .kh-nav-links a {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hero {
+        padding: 28px 20px;
+        border-radius: 21px;
+      }
+
+      .hero h1 {
+        font-size: 25px;
+      }
+
+      .section-title {
+        font-size: 21px;
+      }
+
+      .card {
+        padding: 18px;
+        border-radius: 16px;
+      }
+
+      .kh-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .kh-footer-inner {
+        padding: 34px 20px 20px;
+      }
+    }
   </style>
+  {% block structured_data %}{% endblock %}
 </head>
+
 <body>
-  <header>
-    <a href="{% url 'home' %}">خانه</a>
-    <a href="{% url 'toy_list' %}">اسباب‌بازی‌ها</a>
-    <a href="{% url 'book_list' %}">کتابخانه</a>
+
+  <header class="kh-header">
+    <nav class="kh-nav">
+
+      <a class="kh-brand" href="{% url 'home' %}">
+        <span class="kh-brand-icon">🌱</span>
+        <span class="kh-brand-text">
+          <span class="kh-brand-name">کیدهاب</span>
+          <span class="kh-brand-subtitle">رشد، یادگیری و انتخاب هوشمند</span>
+        </span>
+      </a>
+
+      <div class="kh-nav-links">
+        <a href="{% url 'home' %}">🏠 خانه</a>
+        <a href="{% url 'toy_list' %}">🧸 اسباب‌بازی‌ها</a>
+        <a href="{% url 'book_list' %}">📚 کتابخانه</a>
+        <a class="kh-nav-search" href="{% url 'search' %}">🔎 جست‌وجوی هوشمند</a>
+      </div>
+
+    </nav>
   </header>
-  <div class="container">
+
+  <main class="container">
     {% block content %}{% endblock %}
-  </div>
-  <footer>راهنمای رشد کودک — محتوا صرفاً جنبه‌ی اطلاع‌رسانی دارد.</footer>
+  </main>
+
+  <footer class="kh-footer">
+    <div class="kh-footer-inner">
+
+      <div class="kh-footer-grid">
+
+        <div>
+          <div class="kh-footer-brand">🌱 کیدهاب</div>
+          <p>
+            راهنمای انتخاب کتاب، اسباب‌بازی و محتوای مناسب
+            برای رشد و یادگیری کودک.
+          </p>
+          <p>
+            هدف کیدهاب کمک به والدین برای انتخاب آگاهانه‌تر
+            و متناسب با سن و نیازهای رشدی کودک است.
+          </p>
+        </div>
+
+        <div>
+          <h3>دسترسی سریع</h3>
+          <div class="kh-footer-links">
+            <a href="{% url 'home' %}">خانه</a>
+            <a href="{% url 'toy_list' %}">اسباب‌بازی‌ها</a>
+            <a href="{% url 'book_list' %}">کتابخانه</a>
+            <a href="{% url 'search' %}">جست‌وجوی هوشمند</a>
+          </div>
+        </div>
+
+        <div>
+          <h3>درباره محتوا</h3>
+          <p>
+            محتوای کیدهاب با هدف اطلاع‌رسانی و کمک به انتخاب
+            بهتر والدین ارائه می‌شود.
+          </p>
+          <p>
+            توصیه‌های تخصصی جایگزین نظر پزشک یا متخصص کودک نیست.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="kh-footer-bottom">
+        © کیدهاب — همه حقوق محفوظ است.
+        <div class="kh-footer-note">
+          محتوای سایت صرفاً جنبه اطلاع‌رسانی و آموزشی دارد.
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
 </body>
 </html>
