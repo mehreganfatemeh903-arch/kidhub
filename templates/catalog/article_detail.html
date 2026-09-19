@@ -1,7 +1,60 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
+
+{% block title %}کیدهاب | {{ article.title }}{% endblock %}
+
+{% block meta_description %}
+  {% if article.summary %}
+    {{ article.summary|striptags|truncatechars:155 }}
+  {% else %}
+    {{ article.title }}
+  {% endif %}
+{% endblock %}
+
+{% block og_title %}کیدهاب | {{ article.title }}{% endblock %}
+
+{% block og_description %}
+  {% if article.summary %}
+    {{ article.summary|striptags|truncatechars:155 }}
+  {% else %}
+    {{ article.title }}
+  {% endif %}
+{% endblock %}
+
+{% block twitter_title %}کیدهاب | {{ article.title }}{% endblock %}
+
+{% block twitter_description %}
+  {% if article.summary %}
+    {{ article.summary|striptags|truncatechars:155 }}
+  {% else %}
+    {{ article.title }}
+  {% endif %}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ article.title|escapejs }}",
+  "description": "{{ article.summary|default:article.title|striptags|truncatechars:500|escapejs }}",
+  "url": "{{ request.build_absolute_uri }}",
+  "datePublished": "{{ article.published_at|date:'c' }}",
+  "dateModified": "{{ article.published_at|date:'c' }}",
+  "author": {
+    "@type": "Organization",
+    "name": "کیدهاب"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "کیدهاب"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
   <div class="card">
     <h1>{{ article.title }}</h1>
-    <p>{{ article.body|linebreaks }}</p>
+    <div>{{ article.body|linebreaks }}</div>
   </div>
 {% endblock %}
