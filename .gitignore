@@ -7,3 +7,4 @@ media/
 staticfiles/
 *.log
 media/parent_lullabies/
+catalog_seed.json
