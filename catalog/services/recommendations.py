@@ -230,12 +230,19 @@ def recommend_for_child(child, limit: int = 5):
             ])
         )
 
+        book_development_text = normalize_text(
+            " ".join([
+                book.topic or "",
+                book.developmental_benefit or "",
+            ])
+        )
+
         matched_goals = []
 
         for goal in goals:
             mapped = GOAL_TO_DEVELOPMENT_AREAS.get(goal, set())
 
-            if any(area in book_text for area in mapped):
+            if any(area in book_development_text for area in mapped):
                 matched_goals.append(goal)
 
         matched_interests = interest_matches(
@@ -289,5 +296,8 @@ def recommend_for_child(child, limit: int = 5):
             "name": child.name,
         },
         "age_months": age_months,
-        "recommendations": results[:limit],
+        "recommendations": (
+            [item for item in results if item["type"] == "toy"][:3]
+            + [item for item in results if item["type"] == "book"][:2]
+        )[:limit],
     }
