@@ -14,7 +14,6 @@ db.sqlite3
 *.sqlite3
 catalog_seed.json
 media/parent_lullabies/
-media/
 staticfiles/
 *.log
 Dockerfile*
@@ -31,5 +30,4 @@ bundled-check-2/
 worker.bundle/
 worker-test/
 python_modules/
-media/
 staticfiles/
